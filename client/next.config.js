@@ -1,4 +1,5 @@
-module.exports = {
+const withImages = require('next-images');
+module.exports = withImages({
   webpack(config, options) {
     config.module.rules.push({
       test: /\.graphqls$/,
@@ -15,6 +16,10 @@ module.exports = {
       type: 'json',
       use: 'yaml-loader',
     });
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
     return config;
   },
-};
+});

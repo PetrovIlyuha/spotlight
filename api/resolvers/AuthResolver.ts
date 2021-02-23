@@ -14,7 +14,7 @@ export class AuthResolver {
   ): Promise<UserResponse> {
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
-      throw new Error('Email had been taken.');
+      throw new Error('Email is already in use.');
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new UserModel({ email, password: hashedPassword });
